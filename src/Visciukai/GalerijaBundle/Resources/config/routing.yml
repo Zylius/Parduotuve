@@ -1,0 +1,3 @@
+visciukai_galerija_homepage:
+    path:     /
+    defaults: { _controller: VisciukaiGalerijaBundle:Default:index }

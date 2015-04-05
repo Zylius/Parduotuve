@@ -1,0 +1,4 @@
+visciukai_galerija:
+    resource: "@VisciukaiGalerijaBundle/Resources/config/routing.yml"
+    prefix:   /
+
