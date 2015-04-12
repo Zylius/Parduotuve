@@ -1,0 +1,66 @@
+{% extends 'ZyliusParduotuveBundle::layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid main-container">
+    <div class="col-md-2 sidebar">
+        <div class="row">
+            <!-- uncomment code for absolute positioning tweek see top comment in css -->
+            <div class="absolute-wrapper"> </div>
+            <!-- Menu -->
+            <div class="side-menu">
+                <nav class="navbar navbar-default" role="navigation">
+                    <!-- Main Menu -->
+                    <div class="side-menu-container">
+                        <ul class="nav navbar-nav">
+                            <li class="{% if app.request.attributes.get('_route') == 'zylius_admin_homepage'%}active{% endif %}">
+                                <a href="{{ path('zylius_admin_homepage') }}"><span class="glyphicon glyphicon-signal"></span>{{ 'log.list'|trans }}</a>
+                            </li>
+                            <li class="{% if app.request.attributes.get('_route') == 'zylius_admin_add_product'%}active{% endif %}">
+                                <a href="{{ path('zylius_admin_add_product') }}"><span class="glyphicon glyphicon-plus"></span>{{ 'product.create'|trans }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        {% block admin_content %}
+        <h3 class="dark-grey">{{ 'log.list'|trans }}</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ 'log.table.user'|trans }}</th>
+                <th>{{ 'log.table.action'|trans }}</th>
+                <th>{{ 'log.table.date'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for log in logs %}
+            <tr>
+                <th scope="row">{{ log.id }}</th>
+                <td>{{  log.user }}</td>
+                <td>{{ log.value }}</td>
+                <td>{{ log.time|date('Y-m-d H:i') }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            {% if page > 0 %}<a  href="{{ path('zylius_admin_homepage', {"page": page - 1 }) }}">{{ 'page.last'|trans }}</a>{% endif %}
+            {% if logs|length == 10 %}<a class="pull-right" href="{{ path('zylius_admin_homepage', {"page": page + 1 }) }}">{{ 'page.next'|trans }}</a>{% endif %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@ZyliusParduotuveBundle/Resources/public/css/admin.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts '@ZyliusParduotuveBundle/Resources/public/js/admin.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+

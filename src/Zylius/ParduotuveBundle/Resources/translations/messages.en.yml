@@ -1,0 +1,20 @@
+admin:
+  page: Administrator panel
+log:
+  list: Log list
+  table:
+      user: User
+      action: Action
+      date: Time
+product:
+  create: Create product
+  success: Successfuly created.
+  list: Product list
+  table:
+      name: Name
+      price: Price
+page:
+  next: Next page
+  last: Last page
+form:
+  create: Create

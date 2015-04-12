@@ -1,0 +1,11 @@
+zylius_parduotuve_homepage:
+    path:     /{page}
+    defaults: { _controller: ZyliusParduotuveBundle:ProductCRUD:read, page: 0}
+
+zylius_admin_homepage:
+    path:     /admin/logs/{page}
+    defaults: { _controller: ZyliusParduotuveBundle:Admin:index, page: 0 }
+
+zylius_admin_add_product:
+    path:     /admin/createProduct
+    defaults: { _controller: ZyliusParduotuveBundle:ProductCRUD:create }

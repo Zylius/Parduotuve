@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+{% block title %}Parduotuve{% endblock %}
+{% block init %}{% endblock %}
+{% block top_links %}
+    {{ parent() }}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li class="{% if app.request.attributes.get('_route') ==  'zylius_admin_homepage'%}active{% endif %}">
+            <a href="{{ path('zylius_admin_homepage') }}">{{ 'admin.page' | trans }}</a>
+        </li>
+    {% endif %}
+{% endblock %}
+{% block top_links_right %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li>
+            <a href="{{ path('fos_user_security_logout') }}">{{ "Logout" | trans }}</a>
+        </li>
+    {% else%}
+        <li class="{% if app.request.attributes.get('_route') ==  'fos_user_security_login'%}active{% endif %}">
+            <a href="{{ path('fos_user_security_login') }}">{{ "Login" | trans }}</a>
+        </li>
+        <li class="{% if app.request.attributes.get('_route') ==  'fos_user_registration_register'%}active{% endif %}">
+            <a href="{{ path('fos_user_registration_register') }}">{{ "Register" | trans }}</a>
+        </li>
+    {% endif %}
+{% endblock %}

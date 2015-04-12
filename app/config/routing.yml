@@ -1,4 +1,7 @@
-visciukai_galerija:
-    resource: "@VisciukaiGalerijaBundle/Resources/config/routing.yml"
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+zylius_parduotuve:
+    resource: "@ZyliusParduotuveBundle/Resources/config/routing.yml"
     prefix:   /
 

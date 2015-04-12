@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -29,11 +29,17 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+# Fos configuration
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Zylius\ParduotuveBundle\Entity\User
+
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ZyliusParduotuveBundle]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
