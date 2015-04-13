@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function indexAction($page = 0)
     {
         $perPage = 10;
-        $logs = $this->getDoctrine()->getRepository('ZyliusParduotuveBundle:LogItem')->findBy([], null, $perPage, $perPage * $page);
+        $logs = $this->getDoctrine()->getRepository('ZyliusParduotuveBundle:LogItem')->findBy([], ['id' => 'DESC'], $perPage, $perPage * $page);
         return $this->render(
             'ZyliusParduotuveBundle:Admin:index.html.twig',
             ['logs' => $logs, 'page' => $page]

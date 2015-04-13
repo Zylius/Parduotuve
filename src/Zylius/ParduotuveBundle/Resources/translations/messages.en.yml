@@ -13,8 +13,28 @@ product:
   table:
       name: Name
       price: Price
+      order: Add to cart
+      delete: Delete
 page:
   next: Next page
   last: Last page
 form:
   create: Create
+  update: Update
+  success:
+    edit: Successfully edited.
+basket:
+  page: Basket
+  product:
+    list: Basket product list
+  success: Order submitted successfuly.
+  order: Order
+user:
+  page: User panel
+  edit: Edit user
+  table:
+    name: Name
+    email: Email
+    roles: Roles
+    edit: Edit
+    delete: Delete

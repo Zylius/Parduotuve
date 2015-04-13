@@ -1,0 +1,39 @@
+{% extends 'ZyliusParduotuveBundle::layout.html.twig' %}
+{% block body %}
+    <h3 class="dark-grey">{{ 'basket.product.list'|trans }}</h3>
+    {% if message is defined %}
+        <div class="alert alert-success">{{ message|trans }}</div>
+    {% else %}
+    <table class="table table-striped">
+            <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ 'product.table.name'|trans }}</th>
+            <th>{{ 'product.table.price'|trans }}</th>
+            <th>{{ 'product.table.order'|trans }}</th>
+
+        </tr>
+        </thead>
+
+            <tbody>
+        {% for product in products %}
+            <tr>
+                <th scope="row">{{ product.id }}</th>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td><a href="#"><span data-id="{{ product.id }}" class="order glyphicon glyphicon-tag"></span></a></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <form method="post" action>
+            <input type="submit" value="{{ 'basket.order'|trans }}" class="btn btn-info pull-right">
+        </form>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts '@ZyliusParduotuveBundle/Resources/public/js/bucket.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+

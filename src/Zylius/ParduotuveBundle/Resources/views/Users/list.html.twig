@@ -1,0 +1,42 @@
+{% extends 'ZyliusParduotuveBundle::layout.html.twig' %}
+{% block body %}
+    <div class="col-md-10">
+        <h3 class="dark-grey">{{ 'user.page'|trans }}</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ 'user.table.name'|trans }}</th>
+                <th>{{ 'user.table.email'|trans }}</th>
+                <th>{{ 'user.table.roles'|trans }}</th>
+                <th>{{ 'user.table.edit'|trans }}</th>
+                <th>{{ 'user.table.delete'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+            <tr>
+                <th scope="row">{{ user.id }}</th>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles|join(', ') }}</td>
+                <td><a href="{{ path('zylius_user_edit', {id: user.id}) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <td><a href="{{ path('zylius_user_delete', {id: user.id}) }}"><span class="glyphicon glyphicon-remove"></span></a>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@ZyliusParduotuveBundle/Resources/public/css/admin.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts '@ZyliusParduotuveBundle/Resources/public/js/admin.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+

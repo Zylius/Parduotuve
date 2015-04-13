@@ -1,12 +1,19 @@
 {% extends 'ZyliusParduotuveBundle::layout.html.twig' %}
 {% block body %}
     <h3 class="dark-grey">{{ 'product.list'|trans }}</h3>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}<form id="remove_form" action="{{ path('zylius_admin_delete_product') }}" method="post"> </form>{% endif %}
+
     <table class="table table-striped">
         <thead>
         <tr>
             <th>#</th>
             <th>{{ 'product.table.name'|trans }}</th>
-            <th>{{ 'product.table.price'|trans }}</th></tr>
+            <th>{{ 'product.table.price'|trans }}</th>
+            <th>{{ 'product.table.order'|trans }}</th>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <th>{{ 'product.table.delete'|trans }}</th>
+            {% endif %}
+        </tr>
         </thead>
         <tbody>
         {% for product in products %}
@@ -14,12 +21,22 @@
                 <th scope="row">{{ product.id }}</th>
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}</td>
+                <td><a href="#"><span data-id="{{ product.id }}" class="order glyphicon glyphicon-tag"></span></a></td>
+                {% if is_granted('ROLE_SUPER_ADMIN') %} <td><input form="remove_form" type="checkbox" name="{{ product.id }}" value="Yes" /></td>{% endif %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {% if page > 0 %}<a  href="{{ path('zylius_parduotuve_homepage', {"page": page - 1 }) }}">{{ 'page.last'|trans }}</a>{% endif %}
-    {% if products|length == 10 %}<a class="pull-right" href="{{ path('zylius_parduotuve_homepage', {"page": page + 1 }) }}">{{ 'page.next'|trans }}</a>{% endif %}
+    {% if page > 0 %}<a  href="{{ path('zylius_parduotuve_homepage', {"page": page - 1 }) }}"><button class="btn">{{ 'page.last'|trans }}</button></a>{% endif %}
+    {% if products|length == 10 %}<a class="pull-right" href="{{ path('zylius_parduotuve_homepage', {"page": page + 1 }) }}"><button class="btn">{{ 'page.next'|trans }}</button></a>{% endif %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    <input type="submit" form="remove_form" value="{{ 'product.table.delete'|trans }}" class="btn btn-info pull-right">
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts '@ZyliusParduotuveBundle/Resources/public/js/bucket.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 

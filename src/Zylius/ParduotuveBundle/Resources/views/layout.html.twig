@@ -3,11 +3,19 @@
 {% block init %}{% endblock %}
 {% block top_links %}
     {{ parent() }}
-    {% if is_granted('ROLE_ADMIN') %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
         <li class="{% if app.request.attributes.get('_route') ==  'zylius_admin_homepage'%}active{% endif %}">
             <a href="{{ path('zylius_admin_homepage') }}">{{ 'admin.page' | trans }}</a>
         </li>
     {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li class="{% if app.request.attributes.get('_route') ==  'zylius_user_homepage'%}active{% endif %}">
+            <a href="{{ path('zylius_user_homepage') }}">{{ 'user.page' | trans }}</a>
+        </li>
+    {% endif %}
+    <li class="{% if app.request.attributes.get('_route') ==  'zylius_parduotuve_bucket'%}active{% endif %}">
+        <a href="{{ path('zylius_parduotuve_bucket') }}">{{ 'basket.page' | trans }}</a>
+    </li>
 {% endblock %}
 {% block top_links_right %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}

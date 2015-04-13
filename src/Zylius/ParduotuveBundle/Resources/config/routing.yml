@@ -1,3 +1,19 @@
+zylius_user_homepage:
+    path:     /user
+    defaults: { _controller: ZyliusParduotuveBundle:UserCRUD:read }
+
+zylius_user_edit:
+    path:     /user/edit/{id}
+    defaults: { _controller: ZyliusParduotuveBundle:UserCRUD:update }
+
+zylius_user_delete:
+    path:     /user/delete/{id}
+    defaults: { _controller: ZyliusParduotuveBundle:UserCRUD:delete }
+
+zylius_parduotuve_bucket:
+    path:     /bucket
+    defaults: { _controller: ZyliusParduotuveBundle:ProductCRUD:readBucket }
+
 zylius_parduotuve_homepage:
     path:     /{page}
     defaults: { _controller: ZyliusParduotuveBundle:ProductCRUD:read, page: 0}
@@ -9,3 +25,8 @@ zylius_admin_homepage:
 zylius_admin_add_product:
     path:     /admin/createProduct
     defaults: { _controller: ZyliusParduotuveBundle:ProductCRUD:create }
+
+zylius_admin_delete_product:
+    path:     /admin/deleteProduct
+    defaults: { _controller: ZyliusParduotuveBundle:ProductCRUD:delete }
+    methods:  [POST]
