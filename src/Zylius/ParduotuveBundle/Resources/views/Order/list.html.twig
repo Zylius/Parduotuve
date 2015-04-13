@@ -1,0 +1,40 @@
+{% extends 'ZyliusParduotuveBundle:Order:index.html.twig' %}
+{% block order_content %}
+
+        <h3 class="dark-grey">{{ 'order.list'|trans }}</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ 'order.table.user'|trans }}</th>
+                <th>{{ 'order.table.items'|trans }}</th>
+                <th>{{ 'order.table.confirmer'|trans }}</th>
+                <th>{{ 'order.table.confirm'|trans }}</th>
+                <th>{{ 'user.table.edit'|trans }}</th>
+                <th>{{ 'user.table.delete'|trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <th scope="row">{{ order.id }}</th>
+                    <td>{% if order.user is null %}{{ 'order.not_confirmed'|trans }}{% else %}{{ order.user.username }}{% endif %}</td>
+                    {% set products = [] %}
+                    {% for product in order.products %}
+                    {% set products = products|merge([product.name])  %}
+                    {% endfor %}
+                    <td>{{ products|join(', ') }}</td>
+                    <td>{% if order.confirmer is null %}{{ 'order.not_confirmed'|trans }}{% else %}{{ order.confirmer.username }}{% endif %}</td>
+                    <td><a href="{{ path('zylius_order_confirm', {id: order.id}) }}"><span class="glyphicon glyphicon-check"></span></a></td>
+                    {% if order.confirmer != user and 'ROLE_SUPER_ADMIN' not in user.roles %}
+                        <td><span class="glyphicon glyphicon-pencil"></span></td>
+                    {% else %}
+                        <td><a href="{{ path('zylius_order_edit', {id: order.id}) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                    {% endif %}
+                    <td><a href="{{ path('zylius_order_delete', {id: order.id}) }}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

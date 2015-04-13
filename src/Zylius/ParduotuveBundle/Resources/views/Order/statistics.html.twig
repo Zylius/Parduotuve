@@ -1,0 +1,13 @@
+{% extends 'ZyliusParduotuveBundle:Order:index.html.twig' %}
+{% block order_content %}
+    <h3 class="dark-grey">{{ 'order.reports'|trans }}</h3>
+    <h4 class="grey">{{ 'order.report.timespan'|trans }}</h4>
+    {{ date_min }} - {{ date_max }}
+    <h4 class="grey">{{ 'order.report.avg_price'|trans }}</h4>
+    {{ avg_price }}
+    <h4 class="grey">{{ 'order.report.min_price'|trans }}</h4>
+    {{ min_price }}
+    <h4 class="grey">{{ 'order.report.max_price'|trans }}</h4>
+    {{ max_price }}
+{% endblock %}
+

@@ -38,3 +38,19 @@ user:
     roles: Roles
     edit: Edit
     delete: Delete
+order:
+  page: Orders panel
+  list: Orders list
+  reports: Orders reports
+  not_confirmed: Not confirmed.
+  edit: Order edit
+  table:
+    user: User name
+    items: Items
+    confirmer: Confirmer
+    confirm: Confirm
+  report:
+    timespan: Timespan
+    avg_price: Average price per item
+    min_price: Minimum price per item
+    max_price: Maximum price per item

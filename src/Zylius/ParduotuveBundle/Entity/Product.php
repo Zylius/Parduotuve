@@ -44,15 +44,11 @@ class Product
      */
     private $user;
 
+
     /**
-     * @var ProductOrder[]
+     * @var ProductOrder[]|ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="ProductOrder", inversedBy="products")
-     * @ORM\JoinTable(
-     *      name="order_product",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="order_id", referencedColumnName="id")}
-     * )
+     * @ORM\ManyToMany(targetEntity="ProductOrder", mappedBy="products")
      */
     private $orders;
 

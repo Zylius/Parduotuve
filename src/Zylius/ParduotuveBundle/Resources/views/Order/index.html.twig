@@ -1,0 +1,42 @@
+{% extends 'ZyliusParduotuveBundle::layout.html.twig' %}
+{% block body %}
+<div class="container-fluid main-container">
+    <div class="col-md-2 sidebar">
+        <div class="row">
+            <!-- uncomment code for absolute positioning tweek see top comment in css -->
+            <div class="absolute-wrapper"> </div>
+            <!-- Menu -->
+            <div class="side-menu">
+                <nav class="navbar navbar-default" role="navigation">
+                    <!-- Main Menu -->
+                    <div class="side-menu-container">
+                        <ul class="nav navbar-nav">
+                            <li class="{% if app.request.attributes.get('_route') in ['zylius_order_homepage', 'zylius_order_edit']%}active{% endif %}">
+                                <a href="{{ path('zylius_order_homepage') }}"><span class="glyphicon glyphicon-list"></span>{{ 'order.list'|trans }}</a>
+                            </li>
+                            <li class="{% if app.request.attributes.get('_route') == 'zylius_order_statistics'%}active{% endif %}">
+                                <a href="{{ path('zylius_order_statistics') }}"><span class="glyphicon glyphicon-signal"></span>{{ 'order.reports'|trans }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+    {% block order_content %}
+    {% endblock %}
+    </div>
+</div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@ZyliusParduotuveBundle/Resources/public/css/admin.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts '@ZyliusParduotuveBundle/Resources/public/js/admin.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

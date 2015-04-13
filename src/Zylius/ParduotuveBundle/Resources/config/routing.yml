@@ -10,6 +10,26 @@ zylius_user_delete:
     path:     /user/delete/{id}
     defaults: { _controller: ZyliusParduotuveBundle:UserCRUD:delete }
 
+zylius_order_homepage:
+    path:     /order
+    defaults: { _controller: ZyliusParduotuveBundle:OrderCRUD:read }
+
+zylius_order_edit:
+    path:     /order/edit/{id}
+    defaults: { _controller: ZyliusParduotuveBundle:OrderCRUD:update }
+
+zylius_order_confirm:
+    path:     /order/confirm/{id}
+    defaults: { _controller: ZyliusParduotuveBundle:OrderCRUD:confirm }
+
+zylius_order_delete:
+    path:     /order/delete/{id}
+    defaults: { _controller: ZyliusParduotuveBundle:OrderCRUD:delete }
+
+zylius_order_statistics:
+    path:     /order/statistics
+    defaults: { _controller: ZyliusParduotuveBundle:OrderCRUD:statistics }
+
 zylius_parduotuve_bucket:
     path:     /bucket
     defaults: { _controller: ZyliusParduotuveBundle:ProductCRUD:readBucket }
