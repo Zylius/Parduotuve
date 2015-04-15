@@ -24,9 +24,14 @@
         {% if form.roles is defined %}
             {{ form_label(form.roles) }}
             {% for role in form.roles %}
-        <div class="form-group col-lg-12">
-            {{ form_widget(role, { 'attr': {'class': 'form-control'} }) }}
-        </div>
+                <div class="form-group col-lg-12">
+                    {% set attributes = [] %}
+                    {% if role.vars.value == 'ROLE_USER' %}
+                    {% set attributes = { 'attr': {'disabled' : 'true'} } %}
+                    {% endif %}
+                    {{ form_widget(role, attributes) }}
+                    {{ form_label(role) }}
+                </div>
         {% endfor %}
         {{ form_errors(form.roles) }}
         </div>

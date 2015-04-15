@@ -16,10 +16,14 @@
             <tbody>
             {% for user in users %}
             <tr>
+                {% set roles = [] %}
+                {% for role in user.roles %}
+                    {% set roles = roles|merge([("user.roles." ~ role)|trans])  %}
+                {% endfor %}
                 <th scope="row">{{ user.id }}</th>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.roles|join(', ') }}</td>
+                <td>{{ roles|join(', ') }}</td>
                 <td><a href="{{ path('zylius_user_edit', {id: user.id}) }}"><span class="glyphicon glyphicon-pencil"></span></a>
                 <td><a href="{{ path('zylius_user_delete', {id: user.id}) }}"><span class="glyphicon glyphicon-remove"></span></a>
             </tr>

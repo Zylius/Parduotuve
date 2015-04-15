@@ -38,6 +38,13 @@ user:
     roles: Roles
     edit: Edit
     delete: Delete
+  roles:
+      administrator: Administrator
+      manager: Manager
+      user: Simple user
+      ROLE_SUPER_ADMIN: Administrator
+      ROLE_ADMIN: Manager
+      ROLE_USER: Simple user
 order:
   page: Orders panel
   list: Orders list

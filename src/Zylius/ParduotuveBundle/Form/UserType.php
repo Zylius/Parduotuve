@@ -28,7 +28,17 @@ class UserType extends AbstractType
             ->add('email');
 
         if (in_array('ROLE_SUPER_ADMIN', $this->user->getRoles())) {
-            $builder->add('roles');
+            $builder->add('roles', 'choice',
+                [
+                    'choices' => [
+                        'ROLE_SUPER_ADMIN' => 'user.roles.administrator',
+                        'ROLE_ADMIN' => 'user.roles.manager',
+                        'ROLE_USER' => 'user.roles.user',
+                    ],
+                    'multiple' => true,
+                    'expanded' => true,
+                ]
+            );
         }
     }
 
