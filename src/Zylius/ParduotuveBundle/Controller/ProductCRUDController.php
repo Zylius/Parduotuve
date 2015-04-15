@@ -104,6 +104,13 @@ class ProductCRUDController extends Controller
                 $this->getDoctrine()->getRepository('ZyliusParduotuveBundle:Product')->find($index)
             );
         }
+
+        $logItem = new LogItem();
+        $logItem->setUser($this->getUser());
+        $logItem->setTime(new \DateTime());
+        $logItem->setValue('Deleted product(s) #[' . implode(', ', $indexes). '].');
+        $this->getDoctrine()->getEntityManager()->persist($logItem);
+
         $this->getDoctrine()->getEntityManager()->flush();
         return new RedirectResponse($this->generateUrl('zylius_parduotuve_homepage'));
     }

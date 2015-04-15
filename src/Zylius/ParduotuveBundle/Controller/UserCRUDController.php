@@ -71,6 +71,13 @@ class UserCRUDController extends Controller
         $this->getDoctrine()->getEntityManager()->remove(
             $this->getDoctrine()->getRepository('ZyliusParduotuveBundle:User')->find($id)
         );
+
+        $logItem = new LogItem();
+        $logItem->setUser($this->getUser());
+        $logItem->setTime(new \DateTime());
+        $logItem->setValue('Deleted User #' . $id . '.');
+        $this->getDoctrine()->getEntityManager()->persist($logItem);
+
         $this->getDoctrine()->getEntityManager()->flush();
         return new RedirectResponse($this->generateUrl('zylius_user_homepage'));
     }
