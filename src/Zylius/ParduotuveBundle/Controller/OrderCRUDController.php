@@ -46,6 +46,12 @@ class OrderCRUDController extends Controller
 
         if($request->getMethod() === 'POST') {
             $form->handleRequest($request);
+            if(!$form->isValid()) {
+                return $this->render(
+                    'ZyliusParduotuveBundle:Order:edit.html.twig',
+                    ['form' => $form->createView()]
+                );
+            }
 
             $logItem = new LogItem();
             $logItem->setUser($this->getUser());

@@ -51,6 +51,7 @@ order:
   reports: Orders reports
   not_confirmed: Not confirmed.
   edit: Order edit
+  authenticated: You must be authenticated to order stuff.
   table:
     user: User name
     items: Items

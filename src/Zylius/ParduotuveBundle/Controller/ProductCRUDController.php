@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Zylius\ParduotuveBundle\Entity\LogItem;
 use Zylius\ParduotuveBundle\Entity\Product;
@@ -32,6 +33,8 @@ class ProductCRUDController extends Controller
         if($request->getMethod() === 'POST') {
             $securityContext = $this->container->get('security.context');
             if (!$securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                $session = new Session();
+                $session->getFlashBag()->add('error', 'order.authenticated');
                 throw new AuthenticationException();
             }
             $order = new ProductOrder();
@@ -74,6 +77,12 @@ class ProductCRUDController extends Controller
 
         if($request->getMethod() === 'POST') {
             $form->handleRequest($request);
+            if(!$form->isValid()) {
+                return $this->render(
+                    'ZyliusParduotuveBundle:Admin:add_product.html.twig',
+                    ['form' => $form->createView()]
+                );
+            }
             $product->setUser($this->getUser());
 
             $logItem = new LogItem();
